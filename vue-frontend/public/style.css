@@ -1,0 +1,7 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+.CodeMirror {
+  height: calc(100vh - 30px) !important;
+}

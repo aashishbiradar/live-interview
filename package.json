@@ -1,0 +1,25 @@
+{
+  "name": "live-interview",
+  "version": "1.0.0",
+  "description": "Live Interview App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aashishbiradar/live-interview.git"
+  },
+  "author": "aashishbiradar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aashishbiradar/live-interview/issues"
+  },
+  "homepage": "https://github.com/aashishbiradar/live-interview#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "socket.io": "^4.1.2"
+  }
+}
