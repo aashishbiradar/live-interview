@@ -78,13 +78,9 @@ export default {
     const { shareId } = route.params;
     let socket;
     let editor;
-    // let isConnected = false;
 
     // data
     const code = ref('');
-
-    //computed
-    console.log(route.params);
 
     // socket
     if (window.location.origin === 'http://localhost:8080') {
@@ -94,14 +90,11 @@ export default {
     }
     // connect
     socket.on('connect', () => {
-      // isConnected = true;
-      console.log('Connected to server');
       socket.emit('join', { shareId });
     });
     // disconnect
     socket.on('disconnect', () => {
-      // isConnected = false;
-      console.log('Disconnected');
+      alert('Your are disconnected! Please check your network and retry!');
     });
     // newUser
     socket.on('newUser', (socketId) => {
@@ -133,12 +126,10 @@ export default {
 
     // mounted
     onMounted(() => {
-      console.log('mounted in the composition api!');
       editor = codemirror.fromTextArea(document.getElementById('codearea'), options);
       editor.on('change', () => {
         const newCode = editor.getValue();
         codeChange(newCode);
-        console.log('changed!', newCode);
       });
     });
 
