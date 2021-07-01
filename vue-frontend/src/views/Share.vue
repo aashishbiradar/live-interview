@@ -1,4 +1,5 @@
 <template>
+  <navbar/>
   <div class="share-view">
     <textarea id="codearea"></textarea>
   </div>
@@ -7,6 +8,7 @@
 <script>
 import { ref, onMounted } from "vue";
 import { useRoute } from 'vue-router';
+import Navbar from '@/components/Navbar.vue'
 
 // socket
 import io from 'socket.io-client';
@@ -51,6 +53,7 @@ import 'codemirror/addon/fold/xml-fold.js'
 
 export default {
   name: 'Share',
+  components: { Navbar },
   setup() {
     const options = {
       tabSize: 4,
@@ -145,7 +148,7 @@ export default {
 </script>
 
 <style scoped>
-  .share-view .CodeMirror {
+  div >>> .cm-s-base16-dark.CodeMirror {
     height: calc(100vh - 30px);
   }
 </style>

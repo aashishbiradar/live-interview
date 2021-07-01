@@ -10,7 +10,12 @@ const routes = [
   {
     path: '/share/:shareId',
     name: 'Share',
-    component: () => import('../views/Share.vue')
+    component: () => import('../views/Share.vue'),
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: () => import('../views/Admin.vue'),
   },
 ]
 

@@ -1,7 +1,17 @@
 body {
+  font-family: 'Courier New', Courier, monospace;
   margin: 0;
   padding: 0;
 }
-.CodeMirror {
-  height: calc(100vh - 30px) !important;
+.primary-btn {
+  text-decoration: none;
+  color: #fff;
+  background-color: #3498db;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.primary-btn:hover,
+.primary-btn:active {
+  background-color: #2980b9;
 }
