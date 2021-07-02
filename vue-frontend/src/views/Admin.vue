@@ -1,8 +1,11 @@
 <template>
   <div class="admin">
-    <div v-if="displayQuesiton">
+    
+    <div v-if="displayQuesiton && displayQuesiton[0]">
       <p>Question Displayed:</p>
-      <p>{{displayQuesiton.text}}</p>
+      <div class="question-card">
+        <p>{{displayQuesiton[0].text}}</p>
+      </div>
     </div>
     <div>
       <p>Add Question:</p>
@@ -43,8 +46,8 @@ export default {
     // data
     const questionText = ref('');
     // computed
-    const questions = computed(() => store.state.questions);
-    const displayQuesiton = computed(() => store.state.displayQuesiton);
+    // const questions = computed(() => store.state.questions);
+    // const displayQuesiton = computed(() => store.state.displayQuesiton);
     // methods
     const addQuestion = () => {
       const question = {
@@ -52,6 +55,7 @@ export default {
         text: questionText.value,
       };
       store.dispatch('addQuestion', question);
+      questionText.value = '';
     };
     const removeQuestion = (qId) => {
       store.dispatch('removeQuestion', qId);
@@ -59,7 +63,14 @@ export default {
     const showQuestion = (qId) => {
       store.dispatch('showQuestion', qId);
     };
-    return { questionText, questions, displayQuesiton, addQuestion, removeQuestion, showQuestion };
+    return {
+      questionText,
+      questions: computed(() => store.state.questions),
+      displayQuesiton: computed(() => store.state.displayQuestion),
+      addQuestion,
+      removeQuestion,
+      showQuestion
+    };
   },
 }
 </script>
