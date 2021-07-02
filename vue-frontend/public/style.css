@@ -3,15 +3,27 @@ body {
   margin: 0;
   padding: 0;
 }
-.primary-btn {
+.btn {
   text-decoration: none;
-  color: #fff;
-  background-color: #3498db;
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  height: 30px;
+  padding: 6px 18px;
 }
-.primary-btn:hover,
-.primary-btn:active {
+.primary {
+  color: #fff;
+  background-color: #3498db;
+}
+.primary:hover,
+.primary:active {
   background-color: #2980b9;
+}
+.secondary{
+  color: #fff;
+  background-color: #e74c3c;
+}
+.secondary:hover,
+.secondary:active {
+  background-color: #c0392b;
 }

@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
+import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import Navbar from '@/components/Navbar.vue'
 

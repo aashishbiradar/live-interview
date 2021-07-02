@@ -5,7 +5,7 @@
     </div>
     <div>
       <button
-        class="startBtn primary-btn"
+        class="startBtn btn primary"
         @click="start">
         START
       </button>
