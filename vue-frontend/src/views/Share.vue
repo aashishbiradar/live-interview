@@ -1,12 +1,14 @@
 <template>
   <navbar/>
+  <div v-if="question" class="question">{{question}}</div>
   <div class="share-view">
     <textarea id="codearea"></textarea>
   </div>
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
+import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
 import Navbar from '@/components/Navbar.vue'
 
@@ -73,7 +75,7 @@ export default {
         }
       }
     };
-
+    const store = useStore();
     const route = useRoute();
     const { shareId } = route.params;
     let socket;
@@ -81,6 +83,10 @@ export default {
 
     // data
     const code = ref('');
+    const question = ref('');
+
+    // computed
+    const displayQuesiton = computed(() => store.state.displayQuestion);
 
     // socket
     if (window.location.origin === 'http://localhost:8080') {
@@ -88,22 +94,28 @@ export default {
     } else {
       socket = io();
     }
+
     // connect
     socket.on('connect', () => {
       socket.emit('join', { shareId });
+      showQuestion();
     });
+
     // disconnect
     socket.on('disconnect', () => {
-      alert('Your are disconnected! Please check your network and retry!');
+      // alert('Your are disconnected! Please check your network and retry!');
     });
+
     // newUser
     socket.on('newUser', (socketId) => {
+      showQuestion();
       if (code.value === '') return;
       socket.emit('codeChange', {
         socketId,
         payload: code.value
       });
     });
+
     // codeChange
     socket.on('codeChange', (newContent) => {
       if (newContent === code.value) return;
@@ -112,6 +124,9 @@ export default {
       editor.setValue(code.value);
       editor.setCursor(cursor);
     });
+
+    // new question
+    socket.on('newQuestion', q => question.value = q);
 
     // methods
     const codeChange = (newCode) => {
@@ -124,6 +139,13 @@ export default {
       socket.emit('codeChange', params);
     };
 
+    const showQuestion = () => {
+      if (displayQuesiton.value && displayQuesiton.value) {
+        question.value = displayQuesiton.value,
+        socket.emit('showQuestion', { shareId, question: question.value });
+      }
+    };
+
     // mounted
     onMounted(() => {
       editor = codemirror.fromTextArea(document.getElementById('codearea'), options);
@@ -133,7 +155,7 @@ export default {
       });
     });
 
-    return { shareId, code, codeChange };
+    return { code, question, displayQuesiton, codeChange };
   },
 };
 </script>
@@ -141,5 +163,11 @@ export default {
 <style scoped>
   div >>> .cm-s-base16-dark.CodeMirror {
     height: calc(100vh - 30px);
+  }
+  .question{
+    padding: 25px;
+    background: #151515;
+    color: #fff;
+    font-weight: bold;
   }
 </style>

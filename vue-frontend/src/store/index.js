@@ -1,6 +1,6 @@
 import { createStore } from 'vuex';
 import VuexPersist from 'vuex-persist';
-import { find, remove, pick } from 'lodash';
+import { find, remove } from 'lodash';
 
 const vuexLocal = new VuexPersist({
   storage: window.localStorage
@@ -9,7 +9,7 @@ const vuexLocal = new VuexPersist({
 export default createStore({
   state() {
     return {
-      displayQuestion: [],
+      displayQuestion: '',
       questions: [],
     };
   },
@@ -22,7 +22,7 @@ export default createStore({
     },
     showQuestion (state, qId) {
       const question = find(state.questions, { id: qId});
-      state.displayQuestion.push(pick(question, ['id', 'text']));
+      state.displayQuestion = question.text;
     },
   },
   actions: {

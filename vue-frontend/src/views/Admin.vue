@@ -1,10 +1,10 @@
 <template>
   <div class="admin">
     
-    <div v-if="displayQuesiton && displayQuesiton[0]">
+    <div v-if="displayQuesiton">
       <p>Question Displayed:</p>
       <div class="question-card">
-        <p>{{displayQuesiton[0].text}}</p>
+        <p>{{displayQuesiton}}</p>
       </div>
     </div>
     <div>

@@ -30,6 +30,9 @@ io.on('connection', (socket) => {
         socket.broadcast.to(shareId).emit('codeChange', payload);
       }
     });
+    socket.on('showQuestion', ({ shareId, question }) => {
+      socket.broadcast.to(shareId).emit('newQuestion', question);
+    });
   });
 });
 
